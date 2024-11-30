@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Realizando captura</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Realizando captura</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @if(foto && foto.base64String != '') {
+    <ion-img [src]="'data:image/png;base64,' + foto.base64String"></ion-img>
+
+    <ion-item>
+      <ion-textarea 
+          [(ngModel)]="texto"
+          style="margin: 10px 0px"
+          label="Descreva o momento"
+          placeholder="Descreva o momento"
+          labelPlacement="floating" 
+          fill="outline" 
+          rows="5"></ion-textarea>
+    </ion-item>
+    <ion-button expand="block" color="success" (click)="salvarImagem()">
+      <ion-icon name="save-outline" slot="start"/>
+      Adicionar imagem à galeria
+    </ion-button>
+  }
+
+  <ion-button (click)="realizarCaptura()" expand="block">
+    <ion-icon name="camera-outline" slot="start" />
+    {{ foto && foto.base64String != '' ? 'Realizar outra captura' : 'Realizar captura' }}
+  </ion-button>
+</ion-content>
