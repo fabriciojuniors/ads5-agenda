@@ -1,19 +1,21 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonFab, IonFabButton, IonIcon, IonList, IonItem, IonImg, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton } from '@ionic/angular/standalone';
+import { RouterModule } from '@angular/router';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonFab, IonFabButton, IonIcon, IonList, IonItem, IonImg, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonLabel, IonInput, IonButtons } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import {cameraOutline, saveOutline} from 'ionicons/icons';
+import {cameraOutline, saveOutline, trashOutline, airplane, personOutline, lockClosed, eye, sendOutline, personCircleOutline, cartOutline } from 'ionicons/icons';
 import { ModalController, ActionSheetController } from '@ionic/angular/standalone';
 import { CapturaImagemPage } from '../components/captura-imagem/captura-imagem.page';
 import { GaleriaService } from '../services/galeria.service';
 import { DatePipe } from '@angular/common';
 import { Directory, Filesystem } from '@capacitor/filesystem';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonButton, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonImg, IonItem, IonList, IonIcon, IonFabButton, IonFab, IonHeader, IonToolbar, IonTitle, IonContent, DatePipe],
+  imports: [IonButtons, RouterModule, IonInput, IonLabel, IonButton, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonImg, IonItem, IonList, IonIcon, IonFabButton, IonFab, IonHeader, IonToolbar, IonTitle, IonContent, DatePipe, FormsModule],
 })
 export class HomePage implements OnInit {
 
@@ -24,7 +26,7 @@ export class HomePage implements OnInit {
   public galeriaImagens: any[] = [];
 
   constructor() {
-    addIcons({cameraOutline, saveOutline});
+    addIcons({cartOutline,cameraOutline,personCircleOutline,sendOutline,personOutline,lockClosed,eye,airplane,trashOutline,saveOutline});
   }
 
   ngOnInit(): void {
@@ -82,6 +84,11 @@ export class HomePage implements OnInit {
     })
 
     action.present();
+  }
+
+  public async salvarComentario(dado: any) {
+    await this.galeria.salvarComentario(dado);
+    await this.obterImagens();
   }
 
   private async excluirImagem(dado: any) {

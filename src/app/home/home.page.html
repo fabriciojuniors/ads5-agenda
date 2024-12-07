@@ -3,6 +3,12 @@
     <ion-title>
       Galeria de imagens
     </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button routerLink="/produtos">
+        <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -19,14 +25,33 @@
     </ion-fab-button>
   </ion-fab>
 
+  <!-- <ion-button style="margin-top: 10px;" expand="block" color="success" fill="outline" routerLink="/produtos">Produtos</ion-button> -->
+
   <ion-list>
-    @for(image of galeriaImagens; track image ) {
-      <ion-item lines="none" (click)="abrirAcoes(image)">
+    @for(image of galeriaImagens; track $index ) {
+      <ion-item lines="none">
         <ion-card>
-          <ion-img [src]="image.imagem" alt="Imagem"></ion-img>
-          <ion-card-content>
+          <ion-img [src]="image.imagem" alt="Imagem" (click)="abrirAcoes(image)"></ion-img>
+          <ion-card-content (click)="abrirAcoes(image)">
             <small><strong>Imagem tirada em: {{image.dataHora | date:'dd/MM/yyyy HH:mm'}}</strong></small>
             <p>{{image.texto}}</p>
+          </ion-card-content>
+
+          <ion-card-content>
+            <strong>Comentários</strong>
+            @for(comentario of image.comentarios; track $index) {
+                <ion-label style="display: flex; align-items: center; gap: 10px;">
+                  <ion-icon style="font-size: 20px;" name="person-circle-outline"></ion-icon>
+                  {{comentario}}
+                </ion-label>
+            }
+
+            <div style="display: flex;">
+              <ion-input placeholder="Adicionar comentário" [(ngModel)]="image.comentario" />
+              <ion-button fill="clear" slot="end" (click)="salvarComentario(image)" [disabled]="!image.comentario">
+                <ion-icon style="color: gray;" slot="icon-only" name="send-outline"></ion-icon>
+              </ion-button>
+          </div>
           </ion-card-content>
         </ion-card>
       </ion-item>

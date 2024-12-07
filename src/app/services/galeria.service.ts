@@ -27,4 +27,18 @@ export class GaleriaService {
     const imagensResponse = await Preferences.get({key: 'galeria'})
     return JSON.parse(imagensResponse.value || '[]') as [];
   }
+
+  public async salvarComentario(dado: any) {
+    const imagensResponse = await Preferences.get({key: 'galeria'})
+    const imagens = JSON.parse(imagensResponse.value || '[]') as any[];
+    const imagensAtualizados = imagens.map((item) => {
+      if (item.nomeImagem == dado.nomeImagem) {
+        item.comentarios.push(dado.comentario);
+      }
+
+      return item;
+    })
+
+    await Preferences.set({key: 'galeria', value: JSON.stringify(imagensAtualizados)});
+  }
 }

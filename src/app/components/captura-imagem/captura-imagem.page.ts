@@ -58,6 +58,7 @@ export class CapturaImagemPage implements AfterViewInit {
             texto: this.texto,
             dataHora: new Date().toISOString(),
             pasta: Directory.Data,
+            comentarios: [],
           });
         }
       } catch(err) {
