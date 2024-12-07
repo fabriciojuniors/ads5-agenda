@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ToastController, IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonLabel, IonItem, IonButton, IonInput, IonList, IonIcon } from '@ionic/angular/standalone';
+import { ToastController, IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonLabel, IonItem, IonButton, IonList } from '@ionic/angular/standalone';
 import { ProdutoService } from '../services/produto.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ProdutoService } from '../services/produto.service';
   templateUrl: './produtos.page.html',
   styleUrls: ['./produtos.page.scss'],
   standalone: true,
-  imports: [IonLabel, IonList, IonInput, IonButton, IonItem, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonLabel, IonList, IonButton, IonItem, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonButtons, IonBackButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class ProdutosPage implements OnInit {
 
